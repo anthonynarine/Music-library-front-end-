@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import SearchBar from './Components/SearchBar';
+import SongList from "./Components/SongList"
+
 
 
 function App(){
@@ -9,23 +12,29 @@ function App(){
     useEffect (() => {
         getAllSongs()
     }, []);
+
     
     async function getAllSongs(){
         const response = await axios.get("http://127.0.0.1:8000/api/music/");
-        setSongs(response.data)     
-        console.log(response);
+        setSongs(response.data) 
+        console.log(response.data)      
     };
 
-    // "handles onClick button to get all songs"
-    const handleClick = () => {
-        getAllSongs()
-    }
-
     
+
+    //Searchbar component handler
+    // const handleSubmit = (term) => {
+    // //get all song. filter  all songs title or artist. Include term?
+    //     const result = getAllSongs(term)
+
+    // };
+
+
     return (
         <div>
-            <button onClick={handleClick}>Get All Songs</button>
+            <SongList songs={songs} />
         </div>
+
     );
 }
 
