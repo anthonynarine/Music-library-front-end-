@@ -1,10 +1,17 @@
 
-function MusicTable({song}) {
+function MusicTable({song, onDelete}) {
+    
+    const handleDelete = () => {
+        onDelete(song.id);
+    };
+
+
     return ( 
-    <div>
+    <div>  
         <table>
             <thead>
                 <tr>
+                    <button className="delete" onClick={handleDelete}>Delete</button>
                     <th>{song.title}</th>
                     <th>{song.artist}</th>
                     <th>{song.album}</th>
@@ -17,5 +24,6 @@ function MusicTable({song}) {
 
     )
 }
+
 
 export default MusicTable;

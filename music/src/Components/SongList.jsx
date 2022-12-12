@@ -1,8 +1,8 @@
 import MusicTable from "./MusicTable"
 
-function SongList ({songs}){
+function SongList ({songs, onDelete}){
     const renderedSong = songs.map((song) =>{
-        return <MusicTable key={song.id} song={song} />
+        return <MusicTable onDelete={onDelete} key={song.id} song={song} />
     });
 
 

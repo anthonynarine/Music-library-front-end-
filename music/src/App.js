@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import SearchBar from './Components/SearchBar';
 import SongList from "./Components/SongList"
+import "react-bootstrap"
+import CreateSong from './Components/CreateSong';
 
 
 
@@ -19,20 +21,41 @@ function App(){
         setSongs(response.data) 
         console.log(response.data)      
     };
+    //end of get request
 
+    //this function will take in a url and object body.
+    const createSong = async (title,artist,album,genre,release_date) => {
+        const response = await axios.post("http://127.0.0.1:8000/api/music/", {
+            title,
+            artist,
+            album,
+            genre,
+            release_date,
+        });
+
+        const uppdatedSongs = [...songs, response.data];
+        setSongs(uppdatedSongs)
+    };
+    //end of create request
+
+    const deleteSongById = async (id) => {
+        await axios.delete(`http://127.0.0.1:8000/api/music/${id}`)
+
+
+        const uppdatedSongs = songs.filter((song) =>{
+            return song.id !==id;
+        });
+        
+        setSongs(uppdatedSongs);
+    };
+
+    //end of delete by id request
     
 
-    //Searchbar component handler
-    // const handleSubmit = (term) => {
-    // //get all song. filter  all songs title or artist. Include term?
-    //     const result = getAllSongs(term)
-
-    // };
-
-
     return (
-        <div>
-            <SongList songs={songs} />
+        <div className='app'>
+           <CreateSong onCreate={createSong} />
+           <SongList songs={songs} onDelete={deleteSongById} />
         </div>
 
     );
