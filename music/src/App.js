@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import SearchBar from './Components/SearchBar';
 import SongList from "./Components/SongList"
-import "react-bootstrap"
 import CreateSong from './Components/CreateSong';
 
 
@@ -38,6 +37,7 @@ function App(){
     };
     //end of create request
 
+
     const deleteSongById = async (id) => {
         await axios.delete(`http://127.0.0.1:8000/api/music/${id}`)
 
@@ -48,14 +48,23 @@ function App(){
         
         setSongs(uppdatedSongs);
     };
-
     //end of delete by id request
+
+
+    //function to handle search bar 
+    const handleSubmit = (searchInput) => {
+        console.log("do a search with", searchInput);
+    };
+
+
+
     
 
     return (
         <div className='app'>
            <CreateSong onCreate={createSong} />
            <SongList songs={songs} onDelete={deleteSongById} />
+           <SearchBar onSubmit={handleSubmit} />
         </div>
 
     );
