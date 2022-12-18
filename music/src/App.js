@@ -53,13 +53,23 @@ function App(){
 
     //function to handle search bar 
     const handleSubmit = (searchInput) => {
-        console.log("do a search with", searchInput);
+        getAllSongs(searchInput)
+
+        let result = songs.filter((song)=>{
+            if (song.title.includes(searchInput) ||
+                song.artist.includes(searchInput)||
+                song.album.includes(searchInput) ||
+                song.genre.includes(searchInput) ||
+                song.release_date.includes(SearchBar)) {
+                    return true;
+                }
+                else return false;      
+        });
+        searchInput(result)
     };
 
 
-
     
-
     return (
         <div className='app'>
            <CreateSong onCreate={createSong} />

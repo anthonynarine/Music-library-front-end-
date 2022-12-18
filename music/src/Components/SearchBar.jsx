@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function SearchBar ({songs, onSubmit}) {
+function SearchBar ({onSubmit}) {
 
     const [searchInput, setSearchInput] = useState("");
 
@@ -15,19 +15,20 @@ function SearchBar ({songs, onSubmit}) {
         setSearchInput(event.target.value);
     };
 
-    let result = songs.filter((song)=>{
-        if (
-            song.title.includes(searchInput)||
-            song.artist.includes(searchInput)||
-            song.album.includes(searchInput)||
-            song.genre.includes(searchInput)
-        ) 
-            return true;      
-    });
-
-
-
-
+    // let result = songs.filter((song)=>{
+    //     if (song.title.includes(searchInput) ||
+    //         song.artist.includes(searchInput)||
+    //         song.album.includes(searchInput) ||
+    //         song.genre.includes(searchInput) ||
+    //         song.release_date.includes(SearchBar)) {
+    //             return true;
+    //         }
+    //         else return false;
+   
+    // });
+    // setSearchInput(result)
+    // console.log(result)
+    
 
     return (
         <div>
